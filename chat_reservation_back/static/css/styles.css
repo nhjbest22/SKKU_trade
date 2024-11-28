@@ -1,0 +1,259 @@
+:root {
+  --background-color: rgb(255, 255, 255);
+  --input-field-color: rgb(227, 227, 227);
+  --input-text-color: rgb(183, 190, 201);
+  --active-tab-color: rgb(213, 241, 212);
+  --primary-button-color: rgb(62, 136, 47);
+  --secondary-button-color: rgb(0, 0, 0);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  width: 90%;
+  height: 90vh;
+  max-width: 1200px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 채팅 컨테이너 스타일 */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--active-tab-color);
+  padding: 10px;
+}
+
+.chat-partner-info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-partner-info .profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.status-bar .reservation-status {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: var(--background-color);
+}
+
+/* 메시지 컨테이너를 Flex로 설정 */
+.message {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: flex-end; /* 수직 정렬 */
+}
+
+/* 보낸 메시지는 오른쪽 정렬 */
+.message.sent {
+  justify-content: flex-end;
+}
+
+/* 받은 메시지는 왼쪽 정렬 */
+.message.received {
+  justify-content: flex-start;
+}
+
+.message p {
+  display: inline-block; /* 말풍선을 인라인 블록으로 설정 */
+  background-color: var(--input-field-color);
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: var(--secondary-button-color);
+  font-size: 0.9em;
+  max-width: none; /* 최대 너비 제한 제거 */
+  word-wrap: break-word; /* 긴 단어 자동 줄 바꿈 */
+}
+
+.message.sent p {
+  background-color: var(--primary-button-color);
+  color: var(--background-color);
+}
+
+.message.received p {
+  /* 받은 메시지 말풍선 스타일 유지 */
+}
+
+.timestamp {
+  display: inline-block;
+  font-size: 0.7em;
+  color: var(--input-text-color);
+  margin: 0 5px; /* 좌우 여백 추가 */
+}
+
+/* 보낸 메시지의 타임스탬프는 왼쪽에 */
+.message.sent .timestamp {
+  order: 1; /* 타임스탬프 먼저 */
+  margin-right: 5px; /* 메시지와의 간격 */
+  text-align: right;
+}
+
+/* 받은 메시지의 타임스탬프는 오른쪽에 */
+.message.received .timestamp {
+  order: 2; /* 타임스탬프 나중 */
+  margin-left: 5px; /* 메시지와의 간격 */
+  text-align: left;
+}
+
+.message.sent p {
+  order: 2; /* 메시지가 타임스탬프 뒤에 오도록 */
+}
+
+.message.received p {
+  order: 1; /* 메시지가 타임스탬프 앞에 오도록 */
+}
+
+.message-input-area {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--background-color);
+  border-top: 1px solid #ccc;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--input-field-color);
+  border-radius: 5px;
+  margin-right: 8px;
+  color: var(--input-text-color);
+  font-size: 0.9em;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  color: var(--background-color);
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-left: 5px;
+}
+
+.primary-button {
+  background-color: var(--primary-button-color);
+}
+
+.secondary-button {
+  background-color: var(--secondary-button-color);
+}
+
+.report-button {
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+
+/* 거래 예약 컨테이너 스타일 */
+.reservation-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: var(--active-tab-color);
+}
+
+.reservation-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-section h2 {
+  margin-top: 0;
+  font-size: 1em;
+}
+
+.reservation-section label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.reservation-section input,
+.reservation-section select {
+  width: 100%;
+  padding: 6px;
+  margin-top: 5px;
+  border: 1px solid var(--input-field-color);
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.reservation-section button {
+  margin-top: 15px;
+}
+
+/* 지도 스타일 조정 */
+#map {
+  width: 100%;
+  height: 300px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 주소 표시 바 스타일링 */
+#selectedAddress {
+  background-color: var(--input-field-color);
+  border: 1px solid var(--input-field-color);
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .chat-container {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    height: 50vh;
+  }
+
+  .reservation-container {
+    height: 50vh;
+  }
+}
