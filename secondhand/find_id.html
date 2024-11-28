@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .email-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .email-input input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .email-input span {
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        #id-result {
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🏛 스꾸중고</div>
+        <h1>아이디 찾기</h1>
+        <form>
+            <div class="email-input">
+                <input type="text" id="find-email-prefix" placeholder="이메일 앞부분 (예: user123)" class="input-field" required>
+                <span>@g.skku.edu</span>
+            </div>
+            <button type="button" class="btn-primary" id="find-id-btn">확인</button>
+        </form>
+        <div id="id-result" style="margin-top: 20px; display: none;">
+            <p id="result-message"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</body>
+</html>
