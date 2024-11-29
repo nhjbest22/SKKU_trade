@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>실시간 채팅 및 거래 예약</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
-    />
+    <link rel="stylesheet" href="css/chat_reservation.css" />
     <!-- Kakao 지도 라이브러리 불러오기 (services 라이브러리 포함) -->
     <script
       type="text/javascript"
@@ -24,7 +21,7 @@
           <div class="chat-partner-info">
             <!-- 프로필 사진 추가 -->
             <img
-              src="{{ url_for('static', filename='images/profile.jpg') }}"
+              src="images/profile.jpg"
               alt="프로필 사진"
               class="profile-pic"
             />
@@ -93,6 +90,6 @@
         </div>
       </div>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="js/chat_reservation.js"></script>
   </body>
 </html>

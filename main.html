@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스꾸중고 메인</title>
+    <link rel="stylesheet" href="css/secondhand_style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo" style="color: rgb(62, 136, 47)">🏛 스꾸중고</div>
+      <h1>삼성학술정보관</h1>
+      <p>환영합니다, <span id="user-name"></span>님!</p>
+
+      <div class="menu">
+        <button
+          class="btn-primary"
+          onclick="window.location.href='profile.html';"
+        >
+          프로필 등록 및 평점
+        </button>
+        <button
+          class="btn-primary"
+          onclick="window.location.href='item_registration.html';"
+        >
+          중고 물품 등록
+        </button>
+        <button
+          class="btn-primary"
+          onclick="window.location.href='add_category.html';"
+        >
+          물품 카테고리 추가
+        </button>
+        <button
+          class="btn-primary"
+          onclick="window.location.href='search.html';"
+        >
+          게시글 검색
+        </button>
+        <button
+          class="btn-primary"
+          onclick="window.location.href='chat_reservation.html';"
+        >
+          실시간 채팅 및 거래 예약
+        </button>
+        <button
+          class="btn-primary"
+          onclick="window.location.href='timetable.html';"
+        >
+          시간표 및 거래소 등록
+        </button>
+      </div>
+
+      <button class="btn-secondary" id="logout-btn">로그아웃</button>
+    </div>
+    <script src="js/secondhand_script.js"></script>
+  </body>
+</html>

@@ -1,246 +1,239 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>계정 프로필 및 리뷰</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="css/style.css" />
-        <script src="localStorage.js"></script>
-    </head>
-    <body
-        class="flex items-center justify-center min-h-screen"
-        style="background-color: rgb(255, 255, 255)"
-    >
-        <div class="w-full max-w-sm bg-white rounded-lg shadow-md p-6 m-10">
-            <div class="bg-green-600 text-white text-center py-2 rounded mb-4">
-                거래 후기를 남겨 주세요
-            </div>
-            <h3 class="text-lg font-bold mb-4">거래를 평가해 주세요</h3>
-            <div class="flex items-center mb-4">
-                <div id="star-rating" class="flex">
-                    <span class="text-gray-400 cursor-pointer" data-value="1"
-                        >&#9733;</span
-                    >
-                    <span class="text-gray-400 cursor-pointer" data-value="2"
-                        >&#9733;</span
-                    >
-                    <span class="text-gray-400 cursor-pointer" data-value="3"
-                        >&#9733;</span
-                    >
-                    <span class="text-gray-400 cursor-pointer" data-value="4"
-                        >&#9733;</span
-                    >
-                    <span class="text-gray-400 cursor-pointer" data-value="5"
-                        >&#9733;</span
-                    >
-                </div>
-            </div>
-            <div class="mb-4">
-                <textarea
-                    id="review"
-                    rows="3"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-                    placeholder="리뷰를 작성해 주세요..."
-                ></textarea>
-            </div>
-            <div class="flex gap-4 mb-4">
-                <button
-                    type="button"
-                    id="submit-review"
-                    class="w-full py-3 text-white primary bg-green-600 hover:bg-green-700 rounded-md focus:outline-none focus:ring focus:ring-green-300"
-                >
-                    제출
-                </button>
-                <button
-                    type="button"
-                    class="w-full py-3 text-white secondary hover:bg-gray-800 rounded-md focus:outline-none focus:ring focus:ring-gray-300"
-                    id="toggle-report"
-                >
-                    신고
-                </button>
-            </div>
-            <div class="bg-gray-100 p-4 rounded hidden" id="report-section">
-                <!-- 신고 섹션 -->
-                <h4 class="text-sm font-bold mb-2">신고 상세</h4>
-                <div class="mb-4">
-                    <select
-                        id="report_reason"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-                    >
-                        <option value="">신고 사유를 선택해 주세요</option>
-                        <option value="spam">스팸</option>
-                        <option value="abusive">폭력적 내용</option>
-                        <option value="harassment">괴롭힘</option>
-                        <option value="false-info">허위 정보</option>
-                        <option value="hate-speech">혐오 발언</option>
-                        <option value="scam">사기</option>
-                        <option value="privacy-violation">개인정보 침해</option>
-                        <option value="illegal-content">불법 콘텐츠</option>
-                        <option value="copyright-violation">저작권 침해</option>
-                        <option value="other">기타</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <textarea
-                        id="report_details"
-                        rows="2"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-                        placeholder="추가 내용을 입력해 주세요..."
-                    ></textarea>
-                </div>
-                <div class="mb-4">
-                    <label
-                        for="report_image"
-                        class="text-sm font-bold mb-2 block"
-                        >이미지 업로드 (선택)</label
-                    >
-                    <div
-                        class="flex items-center border border-gray-300 rounded-md px-3 py-2"
-                    >
-                        <label
-                            for="report_image"
-                            class="cursor-pointer secondary text-white px-2 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring focus:ring-gray-300"
-                        >
-                            파일 선택
-                        </label>
-                        <span id="file_name" class="ml-3 text-gray-500"
-                            >선택된 파일이 없습니다</span
-                        >
-                        <input
-                            type="file"
-                            id="report_image"
-                            class="hidden"
-                            accept="image/*"
-                        />
-                    </div>
-                </div>
-                <button
-                    type="button"
-                    class="w-full py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-gray-300"
-                >
-                    신고 제출
-                </button>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계정 프로필 및 리뷰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/localStorage.js"></script>
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen"
+    style="background-color: rgb(255, 255, 255)"
+  >
+    <div class="w-full max-w-sm bg-white rounded-lg shadow-md p-6 m-10">
+      <div class="bg-green-600 text-white text-center py-2 rounded mb-4">
+        거래 후기를 남겨 주세요
+      </div>
+      <h3 class="text-lg font-bold mb-4">거래를 평가해 주세요</h3>
+      <div class="flex items-center mb-4">
+        <div id="star-rating" class="flex">
+          <span class="text-gray-400 cursor-pointer" data-value="1"
+            >&#9733;</span
+          >
+          <span class="text-gray-400 cursor-pointer" data-value="2"
+            >&#9733;</span
+          >
+          <span class="text-gray-400 cursor-pointer" data-value="3"
+            >&#9733;</span
+          >
+          <span class="text-gray-400 cursor-pointer" data-value="4"
+            >&#9733;</span
+          >
+          <span class="text-gray-400 cursor-pointer" data-value="5"
+            >&#9733;</span
+          >
         </div>
+      </div>
+      <div class="mb-4">
+        <textarea
+          id="review"
+          rows="3"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+          placeholder="리뷰를 작성해 주세요..."
+        ></textarea>
+      </div>
+      <div class="flex gap-4 mb-4">
+        <button
+          type="button"
+          id="submit-review"
+          class="w-full py-3 text-white primary bg-green-600 hover:bg-green-700 rounded-md focus:outline-none focus:ring focus:ring-green-300"
+        >
+          제출
+        </button>
+        <button
+          type="button"
+          class="w-full py-3 text-white secondary hover:bg-gray-800 rounded-md focus:outline-none focus:ring focus:ring-gray-300"
+          id="toggle-report"
+        >
+          신고
+        </button>
+      </div>
+      <div class="bg-gray-100 p-4 rounded hidden" id="report-section">
+        <!-- 신고 섹션 -->
+        <h4 class="text-sm font-bold mb-2">신고 상세</h4>
+        <div class="mb-4">
+          <select
+            id="report_reason"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+          >
+            <option value="">신고 사유를 선택해 주세요</option>
+            <option value="spam">스팸</option>
+            <option value="abusive">폭력적 내용</option>
+            <option value="harassment">괴롭힘</option>
+            <option value="false-info">허위 정보</option>
+            <option value="hate-speech">혐오 발언</option>
+            <option value="scam">사기</option>
+            <option value="privacy-violation">개인정보 침해</option>
+            <option value="illegal-content">불법 콘텐츠</option>
+            <option value="copyright-violation">저작권 침해</option>
+            <option value="other">기타</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <textarea
+            id="report_details"
+            rows="2"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+            placeholder="추가 내용을 입력해 주세요..."
+          ></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="report_image" class="text-sm font-bold mb-2 block"
+            >이미지 업로드 (선택)</label
+          >
+          <div
+            class="flex items-center border border-gray-300 rounded-md px-3 py-2"
+          >
+            <label
+              for="report_image"
+              class="cursor-pointer secondary text-white px-2 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring focus:ring-gray-300"
+            >
+              파일 선택
+            </label>
+            <span id="file_name" class="ml-3 text-gray-500"
+              >선택된 파일이 없습니다</span
+            >
+            <input
+              type="file"
+              id="report_image"
+              class="hidden"
+              accept="image/*"
+            />
+          </div>
+        </div>
+        <button
+          type="button"
+          class="w-full py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-gray-300"
+        >
+          신고 제출
+        </button>
+      </div>
+    </div>
 
-        <script>
-            const username = localStorage.getItem("username")
-                ? localStorage.getItem("username")
-                : "admin";
+    <script>
+      const username = localStorage.getItem("username")
+        ? localStorage.getItem("username")
+        : "admin";
 
-            const stars = document.querySelectorAll("#star-rating span");
-            let selectedRating = 0;
+      const stars = document.querySelectorAll("#star-rating span");
+      let selectedRating = 0;
 
-            stars.forEach((star, index) => {
-                star.addEventListener("click", () => {
-                    selectedRating = index + 1;
-                    updateStars(selectedRating);
-                    console.log(`Selected Rating: ${selectedRating}`);
-                });
+      stars.forEach((star, index) => {
+        star.addEventListener("click", () => {
+          selectedRating = index + 1;
+          updateStars(selectedRating);
+          console.log(`Selected Rating: ${selectedRating}`);
+        });
 
-                star.addEventListener("mouseover", () => {
-                    updateStars(index + 1);
-                });
+        star.addEventListener("mouseover", () => {
+          updateStars(index + 1);
+        });
 
-                star.addEventListener("mouseout", () => {
-                    updateStars(selectedRating);
-                });
-            });
+        star.addEventListener("mouseout", () => {
+          updateStars(selectedRating);
+        });
+      });
 
-            function updateStars(rating) {
-                stars.forEach((star, idx) => {
-                    if (idx < rating) {
-                        star.classList.remove("text-gray-400");
-                        star.classList.add("text-yellow-500");
-                    } else {
-                        star.classList.remove("text-yellow-500");
-                        star.classList.add("text-gray-400");
-                    }
-                });
-            }
+      function updateStars(rating) {
+        stars.forEach((star, idx) => {
+          if (idx < rating) {
+            star.classList.remove("text-gray-400");
+            star.classList.add("text-yellow-500");
+          } else {
+            star.classList.remove("text-yellow-500");
+            star.classList.add("text-gray-400");
+          }
+        });
+      }
 
-            document
-                .getElementById("submit-review")
-                .addEventListener("click", () => {
-                    const review = document.getElementById("review").value;
+      document.getElementById("submit-review").addEventListener("click", () => {
+        const review = document.getElementById("review").value;
 
-                    if (!selectedRating || !review) {
-                        alert("평점과 리뷰를 모두 입력해 주세요.");
-                        return;
-                    }
+        if (!selectedRating || !review) {
+          alert("평점과 리뷰를 모두 입력해 주세요.");
+          return;
+        }
 
-                    const data = {
-                        username: "currentUser", // 현재 유저 이름 (임시)
-                        rating: selectedRating,
-                        review: review,
-                    };
+        const data = {
+          username: "currentUser", // 현재 유저 이름 (임시)
+          rating: selectedRating,
+          review: review,
+        };
 
-                    setData("reviews", data);
+        setData("reviews", data);
 
-                    alert("리뷰가 저장되었습니다!");
-                    document.getElementById("review").value = "";
-                    updateStars(0);
-                });
+        alert("리뷰가 저장되었습니다!");
+        document.getElementById("review").value = "";
+        updateStars(0);
+      });
 
-            const reportButton = document.getElementById("toggle-report");
-            const reportSection = document.getElementById("report-section");
+      const reportButton = document.getElementById("toggle-report");
+      const reportSection = document.getElementById("report-section");
 
-            reportButton.addEventListener("click", () => {
-                reportSection.classList.toggle("hidden");
-            });
+      reportButton.addEventListener("click", () => {
+        reportSection.classList.toggle("hidden");
+      });
 
-            const fileInput = document.getElementById("report_image");
-            const fileNameSpan = document.getElementById("file_name");
+      const fileInput = document.getElementById("report_image");
+      const fileNameSpan = document.getElementById("file_name");
 
-            fileInput.addEventListener("change", () => {
-                if (fileInput.files.length > 0) {
-                    fileNameSpan.textContent = fileInput.files[0].name;
-                } else {
-                    fileNameSpan.textContent = "선택된 파일이 없습니다";
-                }
-            });
+      fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+          fileNameSpan.textContent = fileInput.files[0].name;
+        } else {
+          fileNameSpan.textContent = "선택된 파일이 없습니다";
+        }
+      });
 
-            document
-                .querySelector("#report-section button")
-                .addEventListener("click", () => {
-                    const reportReason =
-                        document.getElementById("report_reason").value;
-                    const reportDetails =
-                        document.getElementById("report_details").value;
-                    const reportImage =
-                        document.getElementById("report_image").files[0]?.src ||
-                        "";
+      document
+        .querySelector("#report-section button")
+        .addEventListener("click", () => {
+          const reportReason = document.getElementById("report_reason").value;
+          const reportDetails = document.getElementById("report_details").value;
+          const reportImage =
+            document.getElementById("report_image").files[0]?.src || "";
 
-                    if (!reportReason) {
-                        alert("신고 사유를 선택해 주세요.");
-                        return;
-                    }
+          if (!reportReason) {
+            alert("신고 사유를 선택해 주세요.");
+            return;
+          }
 
-                    const reportData = {
-                        reason: reportReason,
-                        details: reportDetails,
-                        image: reportImage,
-                        date: new Date().toISOString(), // 신고 날짜 저장
-                    };
+          const reportData = {
+            reason: reportReason,
+            details: reportDetails,
+            image: reportImage,
+            date: new Date().toISOString(), // 신고 날짜 저장
+          };
 
-                    // LocalStorage에 저장
-                    const key = "reports";
-                    let existingReports = localStorage.getItem(key)
-                        ? JSON.parse(localStorage.getItem(key))
-                        : [];
-                    existingReports.push(reportData);
-                    localStorage.setItem(key, JSON.stringify(existingReports));
-                    setData("reports", reportData);
+          // LocalStorage에 저장
+          const key = "reports";
+          let existingReports = localStorage.getItem(key)
+            ? JSON.parse(localStorage.getItem(key))
+            : [];
+          existingReports.push(reportData);
+          localStorage.setItem(key, JSON.stringify(existingReports));
+          setData("reports", reportData);
 
-                    // 알림 및 입력 초기화
-                    alert("신고가 제출되었습니다.");
-                    document.getElementById("report_reason").value = "";
-                    document.getElementById("report_details").value = "";
-                    document.getElementById("file_name").textContent =
-                        "선택된 파일이 없습니다";
-                    document.getElementById("report_image").value = "";
-                });
-        </script>
-    </body>
+          // 알림 및 입력 초기화
+          alert("신고가 제출되었습니다.");
+          document.getElementById("report_reason").value = "";
+          document.getElementById("report_details").value = "";
+          document.getElementById("file_name").textContent =
+            "선택된 파일이 없습니다";
+          document.getElementById("report_image").value = "";
+        });
+    </script>
+  </body>
 </html>
