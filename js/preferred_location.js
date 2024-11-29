@@ -11,38 +11,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const nicknameInput = document.getElementById("nicknameInput");
     const saveLocationButton = document.getElementById("saveLocationButton");
 
-    map.on("click", (e) => {
-        const { lat, lng } = e.latlng;
+    // 로컬스토리지에서 데이터 로드
+    function loadLocations() {
+        const locations = JSON.parse(localStorage.getItem("preferredLocations")) || [];
+        locations.forEach((location) => {
+            addLocationToList(location.nickname, location.lat, location.lng, false);
+        });
+    }
 
-        if (currentMarker) {
-            map.removeLayer(currentMarker);
-        }
+    // 로컬스토리지에 데이터 저장
+    function saveLocations() {
+        const locations = [];
+        document.querySelectorAll(".locationItem").forEach((item) => {
+            locations.push({
+                nickname: item.textContent.trim(),
+                lat: item.dataset.lat,
+                lng: item.dataset.lng,
+            });
+        });
+        localStorage.setItem("preferredLocations", JSON.stringify(locations));
+    }
 
-        currentMarker = L.marker([lat, lng])
-            .addTo(map)
-            .openPopup();
-
-        nicknameInput.dataset.lat = lat;
-        nicknameInput.dataset.lng = lng;
-    });
-
-    saveLocationButton.addEventListener("click", async () => {
-        const nickname = nicknameInput.value.trim();
-        const lat = nicknameInput.dataset.lat;
-        const lng = nicknameInput.dataset.lng;
-
-        if (!nickname) {
-            alert("거래 장소의 별명을 입력하세요.");
-            return;
-        } else if (!lat || !lng) {
-            alert("거래 장소를 선택하세요.");
-            return;
-        }
-
+    // 위치 목록에 추가
+    function addLocationToList(nickname, lat, lng, saveToStorage = true) {
         const listItem = document.createElement("li");
         listItem.className = "flex justify-between items-center border-b py-2";
         listItem.innerHTML = `
-            <span class="location-item cursor-pointer text-blue-600 hover:underline" 
+            <span class="locationItem cursor-pointer text-blue-600 hover:underline" 
             data-lat="${lat}" data-lng="${lng}">
             ${nickname}
             </span>
@@ -50,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         // 저장된 위치 클릭 시 지도 이동
-        listItem.querySelector(".location-item").addEventListener("click", (event) => {
+        listItem.querySelector(".locationItem").addEventListener("click", (event) => {
             const lat = event.target.dataset.lat;
             const lng = event.target.dataset.lng;
             map.setView([lat, lng], 16);
@@ -67,9 +62,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         listItem.querySelector(".delete-button").addEventListener("click", () => {
             listItem.remove();
+            saveLocations();
         });
 
         locationList.appendChild(listItem);
+
+        if (saveToStorage) {
+            saveLocations();
+        }
+    }
+
+    map.on("click", (e) => {
+        const { lat, lng } = e.latlng;
+
+        if (currentMarker) {
+            map.removeLayer(currentMarker);
+        }
+
+        currentMarker = L.marker([lat, lng])
+            .addTo(map)
+            .openPopup();
+
+        nicknameInput.dataset.lat = lat;
+        nicknameInput.dataset.lng = lng;
+    });
+
+    saveLocationButton.addEventListener("click", () => {
+        const nickname = nicknameInput.value.trim();
+        const lat = nicknameInput.dataset.lat;
+        const lng = nicknameInput.dataset.lng;
+
+        if (!nickname) {
+            alert("거래 장소의 별명을 입력하세요.");
+            return;
+        } else if (!lat || !lng) {
+            alert("거래 장소를 선택하세요.");
+            return;
+        }
+
+        addLocationToList(nickname, lat, lng);
 
         nicknameInput.value = "";
         nicknameInput.dataset.lat = "";
@@ -77,4 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
         nicknameInput.focus();
         map.removeLayer(currentMarker);
     });
+
+    loadLocations();
 });
