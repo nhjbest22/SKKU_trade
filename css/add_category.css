@@ -71,7 +71,7 @@ input {
 }
 
 .category-title {
-  font-weight:400;
+  font-weight: 400;
 }
 
 .modal {
@@ -99,7 +99,9 @@ input {
   margin: auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative;
 }
+
 #inquiryEmail {
   display: block;
   margin: 10px auto;

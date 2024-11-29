@@ -108,81 +108,50 @@ const forbiddenCategories = [
   "농약",
   "해외배송 신선식품",
 ];
-  
 
-const categories = [
-  {
-    name: "디지털기기/생활가전",
-    subcategories: [
-    ],
-  },
-  {
-    name: "가구/인테리어",
-    subcategories: [
-    ],
-  },
-  {
-    name: "패션/잡화",
-    subcategories: [
-      { name: "시계", subcategories: [] },
-      { name: "벨트", subcategories: [] },
-    ],
-  },
-  {
-    name: "취미/게임/음반",
-    subcategories: [
-    ],
-  },
-  {
-    name: "도서/교재",
-    subcategories: [
-      { name: "소설", subcategories: [] },
-      { name: "자기계발", subcategories: [] },
-      { name: "교과서", subcategories: [] },
-    ],
-  },
-];
-
-
-const categoriesContainer = document.getElementById("categoriesContainer");
-
-  let selectedMainCategory = null;
-  
-  
-  const mainCategoryInput = document.getElementById('mainCategoryInput');
-  const subCategoryInput = document.getElementById('subCategoryInput');
-  const addMainCategoryButton = document.getElementById('addMainCategoryButton');
-  const addSubCategoryButton = document.getElementById('addSubCategoryButton');
-  const message = document.getElementById('message');
-  
-  const inquiryModal = document.getElementById('inquiryModal');
-  const closeInquiryModal = document.getElementById('closeInquiryModal');
-  const customerServiceButton = document.getElementById('customerServiceButton');
-  const sendInquiryButton = document.getElementById('sendInquiryButton');
-  const subCategoryModal = document.getElementById('subCategoryModal');
-  const mainCategoryList = document.getElementById('mainCategoryList');
-  const saveSubCategoryButton = document.getElementById('saveSubCategoryButton');
-  
-  
-  function showMessage(text, isSuccess = true) {
-    message.textContent = text;
-    message.style.color = isSuccess ? 'green' : 'red';
+async function loadCategories() {
+  try {
+    const response = await fetch("./js/categories.json");
+    const categories = await response.json();
+    return categories;
+  } catch (error) {
+    console.error("카테고리 파일을 불러오는 중 오류 발생:", error);
+    return [];
   }
-  
-  
+}
+let categories = [];
+
+// DOM 요소
+const mainCategoryInput = document.getElementById("mainCategoryInput");
+const subCategoryInput = document.getElementById("subCategoryInput");
+const addMainCategoryButton = document.getElementById("addMainCategoryButton");
+const addSubCategoryButton = document.getElementById("addSubCategoryButton");
+const message = document.getElementById("message");
+const categoriesContainer = document.getElementById("categoriesContainer");
+const subCategoryModal = document.getElementById("subCategoryModal");
+const mainCategoryList = document.getElementById("mainCategoryList");
+const saveSubCategoryButton = document.getElementById("saveSubCategoryButton");
+
+let selectedMainCategory = null;
+
+// 메시지 출력
+function showMessage(text, isSuccess = true) {
+  message.textContent = text;
+  message.style.color = isSuccess ? "green" : "red";
+}
+
+// 카테고리 렌더링
 function renderCategories() {
-  categoriesContainer.innerHTML = ""; 
+  categoriesContainer.innerHTML = "";
   categories.forEach((category) => {
     const categoryElement = document.createElement("div");
     categoryElement.className = "category";
 
-    
     const title = document.createElement("div");
     title.textContent = category.name;
     title.className = "category-title";
     categoryElement.appendChild(title);
 
-    
     if (category.subcategories.length > 0) {
       const subList = document.createElement("ul");
       category.subcategories.forEach((sub) => {
@@ -193,73 +162,64 @@ function renderCategories() {
       categoryElement.appendChild(subList);
     }
 
-    
     categoriesContainer.appendChild(categoryElement);
   });
 }
 
+// 메인 카테고리 추가
+addMainCategoryButton.addEventListener("click", () => {
+  const name = mainCategoryInput.value.trim();
+  if (!name) {
+    showMessage("메인 카테고리 이름을 입력해주세요.", false);
+    return;
+  }
+  if (categories.some((cat) => cat.name === name)) {
+    showMessage("중복된 메인 카테고리입니다.", false);
+    return;
+  }
+  if (forbiddenCategories.includes(name)) {
+    showMessage("카테고리가 규정에 어긋납니다.", false);
+    return;
+  }
+  categories.push({ name, subcategories: [] });
+  mainCategoryInput.value = "";
+  showMessage("메인 카테고리가 추가되었습니다.");
+  renderCategories();
+});
 
-renderCategories();
-  
-  
-  addMainCategoryButton.addEventListener('click', () => {
-    const name = mainCategoryInput.value.trim();
-    if (!name) {
-      showMessage('물품 카테고리 이름을 입력해주세요.', false);
-      return;
-    }
-    if (forbiddenCategories.includes(name)) {
-      showMessage('카테고리가 규정에 어긋납니다.', false);
-      return;
-    }
-    if (categories.some(cat => cat.name === name)) {
-      showMessage('중복된 물품 카테고리입니다.', false);
-      return;
-    }
-    categories.push({ name, subcategories: [] });
-    mainCategoryInput.value = '';
-    showMessage('물품 카테고리가 성공적으로 추가되었습니다.');
-    renderCategories();
-  });
-  
-  addSubCategoryButton.addEventListener('click', () => {
-    subCategoryModal.classList.remove('hidden');
-    mainCategoryList.innerHTML = '';
-    categories.forEach((cat, index) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = cat.name;
-      listItem.addEventListener('click', () => {
-        selectedMainCategory = cat;
-        Array.from(mainCategoryList.children).forEach(item => item.classList.remove('selected'));
-        listItem.classList.add('selected');
-      });
-      mainCategoryList.appendChild(listItem);
+// 서브 카테고리 추가 모달 열기
+addSubCategoryButton.addEventListener("click", () => {
+  subCategoryModal.classList.remove("hidden");
+  mainCategoryList.innerHTML = "";
+  categories.forEach((cat) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = cat.name;
+    listItem.addEventListener("click", () => {
+      selectedMainCategory = cat;
+      Array.from(mainCategoryList.children).forEach((item) => item.classList.remove("selected"));
+      listItem.classList.add("selected");
     });
+    mainCategoryList.appendChild(listItem);
   });
-  
-  saveSubCategoryButton.addEventListener('click', () => {
-    const name = subCategoryInput.value.trim();
-    if (!selectedMainCategory || !name) {
-      showMessage('상위 카테고리와 이름을 확인해주세요.', false);
-      return;
-    }
-    selectedMainCategory.subcategories.push({ name });
-    subCategoryInput.value = '';
-    selectedMainCategory = null;
-    subCategoryModal.classList.add('hidden');
-    showMessage('세부 카테고리가 성공적으로 추가되었습니다.');
-    renderCategories();
-  });
-  
-  customerServiceButton.addEventListener('click', () => {
-    inquiryModal.classList.remove('hidden');
-  });
-  
-  closeInquiryModal.addEventListener('click', () => {
-    inquiryModal.classList.add('hidden');
-  });
-  
-  sendInquiryButton.addEventListener('click', () => {
-    alert('문의가 전송되었습니다.');
-    inquiryModal.classList.add('hidden');
-  });
+});
+
+// 서브 카테고리 저장
+saveSubCategoryButton.addEventListener("click", () => {
+  const name = subCategoryInput.value.trim();
+  if (!selectedMainCategory || !name) {
+    showMessage("메인 카테고리와 서브 카테고리 이름을 확인해주세요.", false);
+    return;
+  }
+  selectedMainCategory.subcategories.push({ name });
+  subCategoryInput.value = "";
+  selectedMainCategory = null;
+  subCategoryModal.classList.add("hidden");
+  showMessage("서브 카테고리가 추가되었습니다.");
+  renderCategories();
+});
+
+// 초기 데이터 로드
+document.addEventListener("DOMContentLoaded", async () => {
+  categories = await loadCategories();
+  renderCategories();
+});
