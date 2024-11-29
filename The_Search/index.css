@@ -1,0 +1,132 @@
+﻿/*Resetting the browser*/
+
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+li {
+	list-style: none;
+}
+
+body {
+	font-family: Arial;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	background-color: #FFFFFF;
+	
+}
+
+main {
+	position: relative;
+	width: 400px;
+	height: 600px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+	padding: 20px;
+}
+
+/*search box section*/
+
+.heading {
+	margin: 10px 0;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 20px;
+
+}
+
+.search-section {
+	padding: 8px;
+	border-radius: 26px;
+	border: none;
+	background-color: rgb(62,136,47);
+}
+
+#search {
+	width: 100%;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 26px;
+	outline: none;
+}
+
+.user-list-section {
+	margin-top: 20px;
+}
+
+li {
+	border: 1px solid #dddddd;
+	margin-top: -1px;
+	background-color: #f6f6f6;
+	font-size: 18px;
+	text-transform: capitalize;
+	padding: 12px;
+	align-items: center; 
+}
+
+li:hover {
+	background-color: #eeeeee;
+}
+
+/*pill button for username*/
+
+.username {
+	color: #3e882f;
+	padding: 6px;
+	font-size: 14px;
+	border-radius: 5px;
+	position: absolute;
+	right: 15px;
+	align-items: center; 
+}
+
+
+
+/*media query for large screens*/
+
+@media (min-width: 1000px) {
+	body {
+		width: 50%;
+	}
+	
+	li {
+		font-size: 14px;
+	}
+}
+
+
+
+/*media query for large screens*/
+
+@media (min-width: 1000px) {
+	
+}
+
+
+button {
+	padding: 5px 7px;
+	font-size: 10px;
+	cursor: pointer;
+	background-color: rgb(62,136,47);
+	color: white;
+	border: none;
+	border-radius: 5px;
+}
+button:hover {
+	background-color: #0056b3;
+}
+
+.logo {
+	position: absolute;
+	justify-content: center;
+	top: 10px;
+	left: 190px;
+	font-size: 24px;
+
+}
