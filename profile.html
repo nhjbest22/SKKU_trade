@@ -1,188 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>계정 프로필</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="js/localStorage.js"></script>
-  </head>
-  <body
-    class="flex items-center justify-center min-h-screen"
-    style="background-color: rgb(255, 255, 255)"
-  >
-    <div class="w-full max-w-sm bg-white rounded-lg shadow-md p-6">
-      <div class="flex justify-center mb-6">
-        <!-- 프로필 이미지 미리보기 -->
-        <img
-          id="profile_preview"
-          class="h-24 w-24 rounded-full object-cover border border-gray-300"
-          src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
-          alt="프로필 이미지 미리보기"
-        />
-      </div>
-      <h2 class="text-center text-xl font-bold mb-4">계정 프로필</h2>
-      <form id="profileForm">
-        <div class="mb-4">
-          <label
-            class="block text-sm font-medium text-gray-700 mb-1"
-            for="profile_image"
-          >
-            프로필 이미지 업로드
-          </label>
-          <div class="flex items-center">
-            <label
-              for="profile_image"
-              class="cursor-pointer primary text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-300"
-            >
-              파일 선택
-            </label>
-            <span id="file_name" class="ml-3 text-gray-500"
-              >선택된 파일이 없습니다</span
-            >
-            <input
-              type="file"
-              id="profile_image"
-              class="hidden"
-              accept="image/*"
-            />
-          </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>계정 프로필</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="./css/profile_review_style.css" />
+        <script src="js/localStorage.js"></script>
+    </head>
+    <body
+        class="flex items-center justify-center min-h-screen"
+        style="background-color: rgb(255, 255, 255)"
+    >
+        <div class="w-full max-w-sm bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-center mb-6">
+                <!-- 프로필 이미지 미리보기 -->
+                <img
+                    id="profile_preview"
+                    class="h-24 w-24 rounded-full object-cover border border-gray-300"
+                    src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
+                    alt="프로필 이미지 미리보기"
+                />
+            </div>
+            <h2 class="text-center text-xl font-bold mb-4">계정 프로필</h2>
+            <form id="profileForm">
+                <div class="mb-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        for="profile_image"
+                    >
+                        프로필 이미지 업로드
+                    </label>
+                    <div class="flex items-center">
+                        <label
+                            for="profile_image"
+                            class="cursor-pointer primary text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-300"
+                        >
+                            파일 선택
+                        </label>
+                        <span id="file_name" class="ml-3 text-gray-500"
+                            >선택된 파일이 없습니다</span
+                        >
+                        <input
+                            type="file"
+                            id="profile_image"
+                            class="hidden"
+                            accept="image/*"
+                        />
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        for="full_name"
+                        >이름</label
+                    >
+                    <input
+                        type="text"
+                        id="full_name"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+                        placeholder="이름을 입력해 주세요"
+                    />
+                </div>
+                <div class="mb-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        for="email_address"
+                        >이메일 주소</label
+                    >
+                    <input
+                        type="email"
+                        id="email_address"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+                        placeholder="이메일 주소를 입력해 주세요"
+                    />
+                </div>
+                <div class="mb-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        for="phone_number"
+                        >휴대전화 번호</label
+                    >
+                    <input
+                        type="tel"
+                        id="phone_number"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+                        placeholder="휴대전화 번호를 입력해 주세요"
+                    />
+                </div>
+                <div class="mb-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        for="additional_info"
+                        >추가 정보</label
+                    >
+                    <textarea
+                        id="additional_info"
+                        rows="3"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
+                        placeholder="추가 정보를 입력해 주세요"
+                    ></textarea>
+                </div>
+                <button
+                    type="submit"
+                    class="primary w-full py-3 mt-4 text-white bg-green-600 hover:bg-green-700 rounded-md focus:outline-none focus:ring focus:ring-green-300"
+                >
+                    프로필 저장
+                </button>
+                <button
+                    type="button"
+                    onclick="loadSavedProfile()"
+                    class="w-full py-3 mt-2 text-green-600 border border-green-600 rounded-md hover:bg-green-50"
+                >
+                    저장된 프로필 불러오기
+                </button>
+            </form>
         </div>
-        <div class="mb-4">
-          <label
-            class="block text-sm font-medium text-gray-700 mb-1"
-            for="full_name"
-            >이름</label
-          >
-          <input
-            type="text"
-            id="full_name"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-            placeholder="이름을 입력해 주세요"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block text-sm font-medium text-gray-700 mb-1"
-            for="email_address"
-            >이메일 주소</label
-          >
-          <input
-            type="email"
-            id="email_address"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-            placeholder="이메일 주소를 입력해 주세요"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block text-sm font-medium text-gray-700 mb-1"
-            for="phone_number"
-            >휴대전화 번호</label
-          >
-          <input
-            type="tel"
-            id="phone_number"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-            placeholder="휴대전화 번호를 입력해 주세요"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block text-sm font-medium text-gray-700 mb-1"
-            for="additional_info"
-            >추가 정보</label
-          >
-          <textarea
-            id="additional_info"
-            rows="3"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200"
-            placeholder="추가 정보를 입력해 주세요"
-          ></textarea>
-        </div>
-        <button
-          type="submit"
-          class="primary w-full py-3 mt-4 text-white bg-green-600 hover:bg-green-700 rounded-md focus:outline-none focus:ring focus:ring-green-300"
-        >
-          프로필 저장
-        </button>
-        <button
-          type="button"
-          onclick="loadSavedProfile()"
-          class="w-full py-3 mt-2 text-green-600 border border-green-600 rounded-md hover:bg-green-50"
-        >
-          저장된 프로필 불러오기
-        </button>
-      </form>
-    </div>
-    <script>
-      const username = localStorage.getItem("username")
-        ? localStorage.getItem("username")
-        : "admin";
+        <script>
+            const username = localStorage.getItem("username")
+                ? localStorage.getItem("username")
+                : "admin";
 
-      // 파일 입력 및 미리보기 처리
-      const fileInput = document.getElementById("profile_image");
-      const fileNameSpan = document.getElementById("file_name");
-      const profilePreview = document.getElementById("profile_preview");
-      const profileForm = document.getElementById("profileForm");
+            // 파일 입력 및 미리보기 처리
+            const fileInput = document.getElementById("profile_image");
+            const fileNameSpan = document.getElementById("file_name");
+            const profilePreview = document.getElementById("profile_preview");
+            const profileForm = document.getElementById("profileForm");
 
-      fileInput.addEventListener("change", () => {
-        if (fileInput.files && fileInput.files[0]) {
-          const file = fileInput.files[0];
-          fileNameSpan.textContent = file.name; // 파일 이름 표시
+            fileInput.addEventListener("change", () => {
+                if (fileInput.files && fileInput.files[0]) {
+                    const file = fileInput.files[0];
+                    fileNameSpan.textContent = file.name; // 파일 이름 표시
 
-          // 이미지 미리보기 설정
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            profilePreview.src = e.target.result; // 미리보기 이미지 업데이트
-          };
-          reader.readAsDataURL(file);
-        } else {
-          fileNameSpan.textContent = "선택된 파일이 없습니다";
-          profilePreview.src =
-            "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"; // 기본 이미지로 복원
-        }
-      });
+                    // 이미지 미리보기 설정
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        profilePreview.src = e.target.result; // 미리보기 이미지 업데이트
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    fileNameSpan.textContent = "선택된 파일이 없습니다";
+                    profilePreview.src =
+                        "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"; // 기본 이미지로 복원
+                }
+            });
 
-      profileForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+            profileForm.addEventListener("submit", function (e) {
+                e.preventDefault();
 
-        const profileData = {
-          username: username,
-          profileImage: profilePreview.src,
-          fullName: document.getElementById("full_name").value,
-          email: document.getElementById("email_address").value,
-          phoneNumber: document.getElementById("phone_number").value,
-          additionalInfo: document.getElementById("additional_info").value,
-        };
+                const profileData = {
+                    username: username,
+                    profileImage: profilePreview.src,
+                    fullName: document.getElementById("full_name").value,
+                    email: document.getElementById("email_address").value,
+                    phoneNumber: document.getElementById("phone_number").value,
+                    additionalInfo:
+                        document.getElementById("additional_info").value,
+                };
 
-        // localStorage에 저장
-        setData("userProfile", profileData);
-        alert("프로필이 저장되었습니다!");
-      });
+                // localStorage에 저장
+                setData("userProfile", profileData);
+                alert("프로필이 저장되었습니다!");
+            });
 
-      function loadSavedProfile() {
-        const savedProfile = findData("userProfile", username);
+            function loadSavedProfile() {
+                const savedProfile = findData("userProfile", username);
 
-        if (savedProfile) {
-          const profileData = savedProfile;
+                if (savedProfile) {
+                    const profileData = savedProfile;
 
-          // 저장된 데이터로 폼 채우기
-          profilePreview.src = profileData.profileImage;
-          document.getElementById("full_name").value = profileData.fullName;
-          document.getElementById("email_address").value = profileData.email;
-          document.getElementById("phone_number").value =
-            profileData.phoneNumber;
-          document.getElementById("additional_info").value =
-            profileData.additionalInfo;
+                    // 저장된 데이터로 폼 채우기
+                    profilePreview.src = profileData.profileImage;
+                    document.getElementById("full_name").value =
+                        profileData.fullName;
+                    document.getElementById("email_address").value =
+                        profileData.email;
+                    document.getElementById("phone_number").value =
+                        profileData.phoneNumber;
+                    document.getElementById("additional_info").value =
+                        profileData.additionalInfo;
 
-          // 파일 이름 업데이트
-          fileNameSpan.textContent = "기존 프로필 이미지 로드됨";
-        } else {
-          alert("저장된 프로필이 없습니다.");
-        }
-      }
-    </script>
-  </body>
+                    // 파일 이름 업데이트
+                    fileNameSpan.textContent = "기존 프로필 이미지 로드됨";
+                } else {
+                    alert("저장된 프로필이 없습니다.");
+                }
+            }
+        </script>
+    </body>
 </html>
