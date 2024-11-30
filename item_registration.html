@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>중고물품 등록</title>
-    <link rel="stylesheet" href="css/item_registration.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="form-title">중고물품 등록</h1>
-      <form id="itemForm">
-        <input type="text" id="title" placeholder="제목" required />
-        <textarea id="description" rows="3" placeholder="설명"></textarea>
-        <input type="number" id="price" placeholder="가격" required />
-        <select id="category" required>
-          <option value="">카테고리</option>
-        </select>
-        <div class="image-upload">
-          <button type="button" class="upload-image-btn" id="uploadImageBtn">이미지 업로드</button>
-          <div id="imagePreviewContainer" class="image-preview-container">
-            <span>이미지가 여기에 표시됩니다.</span>
-          </div>
-          <input type="file" id="image" accept="image/*" multiple style="display: none" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>중고물품 등록</title>
+        <link rel="stylesheet" href="css/item_registration.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="form-title">중고물품 등록</h1>
+            <form id="itemForm">
+                <input type="text" id="title" placeholder="제목" required />
+                <textarea
+                    id="description"
+                    rows="3"
+                    placeholder="설명"
+                ></textarea>
+                <input type="number" id="price" placeholder="가격" required />
+                <select id="category" required>
+                    <option value="">카테고리</option>
+                </select>
+                <div class="image-upload">
+                    <button
+                        type="button"
+                        class="upload-image-btn"
+                        id="uploadImageBtn"
+                    >
+                        이미지 업로드
+                    </button>
+                    <div
+                        id="imagePreviewContainer"
+                        class="image-preview-container"
+                    >
+                        <span>이미지가 여기에 표시됩니다.</span>
+                    </div>
+                    <input
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                        multiple
+                        style="display: none"
+                    />
+                </div>
+                <div class="location-time-section">
+                    <button
+                        type="button"
+                        class="add-location-btn"
+                        id="openModalBtn"
+                    >
+                        장소 및 시간 추가
+                    </button>
+                    <div class="location-time-list" id="locationTimeList"></div>
+                </div>
+                <button type="submit" class="register-btn">물품 등록</button>
+            </form>
         </div>
-        <div class="location-time-section">
-          <button type="button" class="add-location-btn" id="openModalBtn">장소 및 시간 추가</button>
-          <div class="location-time-list" id="locationTimeList"></div>
+        <div class="modal" id="locationModal">
+            <div class="modal-content">
+                <h3>장소 및 시간 추가</h3>
+                <input
+                    type="text"
+                    id="modalLocationInput"
+                    placeholder="위치를 입력하세요"
+                />
+                <input type="time" id="modalTimeInput" />
+                <div class="modal-buttons">
+                    <button class="cancel-btn" id="cancelModalBtn">취소</button>
+                    <button class="save-btn" id="saveModalBtn">추가</button>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="register-btn">물품 등록</button>
-      </form>
-    </div>
-    <div class="modal" id="locationModal">
-      <div class="modal-content">
-        <h3>장소 및 시간 추가</h3>
-        <input type="text" id="modalLocationInput" placeholder="위치를 입력하세요" />
-        <input type="time" id="modalTimeInput" />
-        <div class="modal-buttons">
-          <button class="cancel-btn" id="cancelModalBtn">취소</button>
-          <button class="save-btn" id="saveModalBtn">추가</button>
-        </div>
-      </div>
-    </div>
-    <script type="module" src="js/item_registration.js"></script>
-  </body>
+        <script type="module" src="js/item_registration.js"></script>
+    </body>
 </html>
