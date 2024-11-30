@@ -14,20 +14,12 @@
       </div>
 
       <div class="form">
-        <input
-          type="text"
-          id="mainCategoryInput"
-          placeholder="물품 카테고리를 입력하세요"
-        />
+        <input type="text" id="mainCategoryInput" placeholder="물품 카테고리를 입력하세요" />
         <button id="addMainCategoryButton" class="button-green">추가</button>
       </div>
 
       <div class="form">
-        <input
-          type="text"
-          id="subCategoryInput"
-          placeholder="세부 카테고리를 선택하세요"
-        />
+        <input type="text" id="subCategoryInput" placeholder="세부 카테고리를 선택하세요" />
         <button id="addSubCategoryButton" class="button-green">추가</button>
       </div>
 
@@ -37,30 +29,15 @@
 
     <div id="inquiryModal" class="modal hidden">
       <div class="modal-content">
-        <button id="closeInquiryModal" class="close-button">×</button>
         <h3>문의하기</h3>
-        <p>
-          <strong>관련 내용 문의</strong><br />물품 추가, 판매금지 물품 규정 등
-        </p>
-        <input
-          type="email"
-          id="inquiryEmail"
-          placeholder="답장받을 이메일 (example@email.com)"
-          style="
-            width: 95%;
-            padding: 12px;
-            font-size: 16px;
-            margin-bottom: 10px;
-          "
-        />
-        <textarea
-          id="inquiryMessage"
-          placeholder="문의 내용"
-          style="width: 95%; height: 150px; padding: 12px; font-size: 16px"
-        ></textarea>
+        <p><strong>관련 내용 문의</strong><br />물품 추가, 판매금지 물품 규정 등</p>
+        <input type="email" id="inquiryEmail" placeholder="제목" style="width: 95%; padding: 12px; font-size: 16px; margin-bottom: 10px" />
+        <textarea id="inquiryMessage" placeholder="문의 내용" style="width: 95%; height: 150px; padding: 12px; font-size: 16px"></textarea>
         <button id="sendInquiryButton" class="button-green">전송</button>
       </div>
+      <button id="closeInquiryModal" class="close-button">×</button>
     </div>
+
     <div id="subCategoryModal" class="modal hidden">
       <div class="modal-content">
         <h3>Select Main Category</h3>

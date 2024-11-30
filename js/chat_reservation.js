@@ -104,13 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const minutes = ("0" + currentTime.getMinutes()).slice(-2);
     timestamp.textContent = `${hours}:${minutes}`;
 
-    // 메시지 내용 생성
-    const messageContent = document.createElement("p");
-    messageContent.textContent = message;
-
     // 메시지 내용 생성 (\n을 <br>로 변환)
-    const formattedMessage = message.replace(/\n/g, "<br>"); // 모든 \n을 <br>로 변환
-    messageContent.innerHTML = formattedMessage; // innerHTML로 설정
+    const messageContent = document.createElement("p");
+    const formattedMessage = message.replace(/\n/g, "<br>");
+    messageContent.innerHTML = formattedMessage;
 
     // 메시지에 따라 타임스탬프 위치 조정
     if (messageType === "sent") {
@@ -126,8 +123,31 @@ document.addEventListener("DOMContentLoaded", () => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
   }
 
+  // 상대방이 보낼 메시지 배열
+  const incomingMessages = [
+    "안녕하세요!",
+    "상품에 대해 궁금한 점이 있습니다.",
+    "거래 장소는 어디로 할까요?",
+    "시간은 언제가 편하신가요?",
+    "감사합니다!",
+  ];
+
+  // 메시지 인덱스 초기화
+  let messageIndex = 0;
+
+  // 일정 시간 간격으로 상대방 메시지 추가
+  const intervalId = setInterval(function () {
+    if (messageIndex < incomingMessages.length) {
+      // 상대방의 메시지를 채팅창에 추가
+      addMessageToChatWindow(incomingMessages[messageIndex], "received");
+      messageIndex++;
+    } else {
+      // 모든 메시지를 보냈으면 interval 중지
+      clearInterval(intervalId);
+    }
+  }, 5000); // 5000ms = 5초
+
   // Kakao 지도 초기화 및 장소 선택/주소 표시 기능
-  // (기존 코드 유지)
   var container = document.getElementById("map"); // 지도를 표시할 div
   var options = {
     center: new kakao.maps.LatLng(37.293912, 126.974348), // 초기 중심 좌표

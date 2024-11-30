@@ -9,6 +9,59 @@ const modalLocationInput = document.getElementById("modalLocationInput");
 const modalTimeInput = document.getElementById("modalTimeInput");
 const locationTimeList = document.getElementById("locationTimeList");
 const form = document.getElementById("itemForm");
+const categorySelect = document.getElementById("category");
+
+const categoriesFile = "./js/categories.json";
+let categories = [];
+
+async function loadCategories() {
+  try {
+    const response = await fetch(categoriesFile);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    categories = await response.json();
+    populateCategories();
+  } catch (error) {
+    console.error("카테고리 파일을 불러오는 중 오류 발생:", error);
+  }
+}
+
+function populateCategories() {
+  categorySelect.innerHTML = '<option value="">카테고리 선택</option>';
+  categories.forEach((category) => {
+    const mainOption = document.createElement("option");
+    mainOption.value = category.name;
+    mainOption.textContent = category.name;
+    mainOption.style.fontWeight = "bold";
+    categorySelect.appendChild(mainOption);
+
+    category.subcategories.forEach((sub) => {
+      const subOption = document.createElement("option");
+      subOption.value = `${category.name} - ${sub.name}`;
+      subOption.textContent = `  ↳ ${sub.name}`;
+      subOption.style.paddingLeft = "10px";
+      categorySelect.appendChild(subOption);
+    });
+  });
+}
+
+async function updateCategoriesFile() {
+  try {
+    const response = await fetch(categoriesFile, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(categories, null, 2),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("카테고리 파일을 업데이트하는 중 오류 발생:", error);
+  }
+}
 
 uploadImageBtn.addEventListener("click", () => {
   imageInput.click();
@@ -71,7 +124,7 @@ saveModalBtn.addEventListener("click", () => {
   }
 });
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const title = document.getElementById("title").value.trim();
@@ -93,7 +146,16 @@ form.addEventListener("submit", (e) => {
     )}`
   );
 
+  const [mainCategory, subCategory] = category.split(" - ");
+  const targetCategory = categories.find((cat) => cat.name === mainCategory);
+  if (subCategory && targetCategory) {
+    targetCategory.subcategories.push({ name: subCategory, subcategories: [] });
+    await updateCategoriesFile();
+  }
+
   form.reset();
   locationTimeList.innerHTML = "";
   imagePreviewContainer.innerHTML = "<span>이미지가 여기에 표시됩니다.</span>";
 });
+
+document.addEventListener("DOMContentLoaded", loadCategories);
