@@ -1,44 +1,48 @@
 [
-  {
-    "name": "디지털기기/생활가전",
-    "subcategories": []
-  },
-  {
-    "name": "가구/인테리어",
-    "subcategories": []
-  },
-  {
-    "name": "패션/잡화",
-    "subcategories": [
-      {
-        "name": "시계",
+    {
+        "name": "디지털기기/생활가전",
         "subcategories": []
-      },
-      {
-        "name": "벨트",
+    },
+    {
+        "name": "가구/인테리어",
         "subcategories": []
-      }
-    ]
-  },
-  {
-    "name": "취미/게임/음반",
-    "subcategories": []
-  },
-  {
-    "name": "도서/교재",
-    "subcategories": [
-      {
-        "name": "소설",
+    },
+    {
+        "name": "패션/잡화",
+        "subcategories": [
+            {
+                "name": "시계",
+                "subcategories": []
+            },
+            {
+                "name": "벨트",
+                "subcategories": []
+            }
+        ]
+    },
+    {
+        "name": "취미/게임/음반",
         "subcategories": []
-      },
-      {
-        "name": "자기계발",
+    },
+    {
+        "name": "도서/교재",
+        "subcategories": [
+            {
+                "name": "소설",
+                "subcategories": []
+            },
+            {
+                "name": "자기계발",
+                "subcategories": []
+            },
+            {
+                "name": "교과서",
+                "subcategories": []
+            }
+        ]
+    },
+    {
+        "name": "전자제품",
         "subcategories": []
-      },
-      {
-        "name": "교과서",
-        "subcategories": []
-      }
-    ]
-  }
+    }
 ]
