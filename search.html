@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/search.css" />
-    <title>검색 템플릿</title>
-  </head>
-  <body>
-    <main>
-      <!--<input type="text" id="search" placeholder="Search by Username...">-->
-      <button>Back</button>
-      <div class="logo">🏛</div>
-      <h2 class="heading">검색 창</h2>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href="css/search.css" />
+        <title>아이템 검색</title>
+    </head>
+    <body>
+        <main>
+            <button onclick="window.history.back()">Back</button>
+            <div class="logo">🏛</div>
+            <h2 class="heading">아이템 검색</h2>
 
-      <!--Search box section-->
+            <!-- Search box section -->
+            <section class="search-section">
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="아이템 검색..."
+                    onkeyup="filterItems()"
+                />
+            </section>
 
-      <section class="search-section">
-        <input
-          type="text"
-          id="search"
-          placeholder="Search Item..."
-          onkeyup="searchUsersByUsername()"
-        />
-      </section>
-
-      <!--User list section-->
-
-      <section class="user-list-section">
-        <!--The li tags are dynamic from the JS file-->
-        <ul id="user-list-container"></ul>
-      </section>
-    </main>
-  </body>
-  <script src="js/search.js"></script>
+            <!-- Item list section -->
+            <section class="item-list-section">
+                <ul id="item-list-container"></ul>
+            </section>
+        </main>
+        <script src="js/search.js"></script>
+    </body>
 </html>

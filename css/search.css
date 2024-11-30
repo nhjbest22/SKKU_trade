@@ -1,132 +1,133 @@
-﻿/*Resetting the browser*/
-
-
-
+﻿/* Resetting the browser */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 li {
-	list-style: none;
+    list-style: none;
 }
 
 body {
-	font-family: Arial;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 30px;
-	background-color: #FFFFFF;
-	
+    font-family: Arial, sans-serif;
+    width: 90%;
+    margin: 30px auto;
+    background-color: #f9f9f9;
 }
 
 main {
-	position: relative;
-	width: 400px;
-	height: 600px;
-	border-radius: 10px;
-	box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-	padding: 20px;
+    position: relative;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 0 auto;
 }
 
-/*search box section*/
-
+/* Search box section */
 .heading {
-	margin: 10px 0;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 20px;
-
+    margin: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
 }
 
 .search-section {
-	padding: 8px;
-	border-radius: 26px;
-	border: none;
-	background-color: rgb(62,136,47);
+    margin-bottom: 20px;
+    background-color: rgb(62, 136, 47);
+    border-radius: 26px;
+    padding: 8px;
 }
 
 #search {
-	width: 100%;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 26px;
-	outline: none;
+    width: 100%;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 26px;
+    outline: none;
 }
 
-.user-list-section {
-	margin-top: 20px;
+/* Item list section */
+ul#item-list-container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 li {
-	border: 1px solid #dddddd;
-	margin-top: -1px;
-	background-color: #f6f6f6;
-	font-size: 18px;
-	text-transform: capitalize;
-	padding: 12px;
-	align-items: center; 
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    margin: 10px 0;
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    max-width: 350px; /* 카드 최대 폭 */
 }
 
 li:hover {
-	background-color: #eeeeee;
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/*pill button for username*/
-
-.username {
-	color: #3e882f;
-	padding: 6px;
-	font-size: 14px;
-	border-radius: 5px;
-	position: absolute;
-	right: 15px;
-	align-items: center; 
+/* 아이템 제목 */
+.item-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-
-
-/*media query for large screens*/
-
-@media (min-width: 1000px) {
-	body {
-		width: 50%;
-	}
-	
-	li {
-		font-size: 14px;
-	}
+/* 아이템 설명 */
+.item-description {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 5px;
+    line-height: 1.4;
 }
 
-
-
-/*media query for large screens*/
-
-@media (min-width: 1000px) {
-	
+/* 아이템 가격 */
+.item-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(62, 136, 47);
+    margin-bottom: 5px;
 }
 
+/* 카테고리 및 장소/시간 */
+.item-category,
+.item-location-time {
+    font-size: 0.8rem;
+    color: #777;
+}
 
+/* Button style */
 button {
-	padding: 5px 7px;
-	font-size: 10px;
-	cursor: pointer;
-	background-color: rgb(62,136,47);
-	color: white;
-	border: none;
-	border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: rgb(62, 136, 47);
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
+
 button:hover {
-	background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .logo {
-	position: absolute;
-	justify-content: center;
-	top: 10px;
-	left: 190px;
-	font-size: 24px;
-
+    position: absolute;
+    justify-content: center;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
 }
