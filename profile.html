@@ -121,6 +121,10 @@
                 ? localStorage.getItem("username")
                 : "admin";
 
+            const user = JSON.parse(localStorage.getItem("user"));
+            document.getElementById("full_name").value = user.name;
+            document.getElementById("email_address").value = user.email;
+
             // 파일 입력 및 미리보기 처리
             const fileInput = document.getElementById("profile_image");
             const fileNameSpan = document.getElementById("file_name");
