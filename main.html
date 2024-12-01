@@ -56,12 +56,18 @@
                 </button>
             </div>
 
-            <button class="btn-secondary" id="logout-btn">로그아웃</button>
+            <button
+                class="btn-secondary"
+                id="logout-btn"
+                onclick="window.location.href='index.html';"
+            >
+                로그아웃
+            </button>
         </div>
         <script src="js/secondhand_script.js"></script>
         <script>
-            const userName = localStorage.getItem("userName");
-            document.getElementById("user-name").textContent = userName;
+            const user = JSON.parse(localStorage.getItem("user"));
+            document.getElementById("user-name").textContent = user.name;
         </script>
     </body>
 </html>
