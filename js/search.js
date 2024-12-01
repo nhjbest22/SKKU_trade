@@ -107,6 +107,13 @@ function displayItems(items) {
       <p><strong>카테고리:</strong> ${item.category}</p>
       <p><strong>거래 장소 및 시간:</strong> ${item.locations.join(", ")}</p>
     `;
+
+        listItem.addEventListener("click", () => {
+            window.location.href = `chat_reservation.html?item=${encodeURIComponent(
+                item.title
+            )}`;
+        });
+
         itemListContainer.appendChild(listItem);
     });
 }
@@ -138,14 +145,14 @@ function addSampleItems() {
             description: "거의 새 제품",
             price: "400,000",
             category: "취미/게임/음반",
-            locations: ["디도 앞, 12:00"],
+            locations: ["산학협력관, 12:00"],
         },
         {
             title: "중고 노트북",
             description: "i5 프로세서, 8GB RAM",
             price: "500,000",
             category: "전자제품",
-            locations: ["제2공, 15:00"],
+            locations: ["반도체관, 15:00"],
         },
         {
             title: "FENDER JAZZ BASS",
@@ -169,3 +176,5 @@ document.addEventListener("DOMContentLoaded", () => {
     const items = fetchItems();
     displayItems(items);
 });
+
+localStorage.removeItem("registeredItems");
