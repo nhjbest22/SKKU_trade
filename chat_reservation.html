@@ -1,98 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <title>실시간 채팅 및 거래 예약</title>
-        <link rel="stylesheet" href="css/chat_reservation.css" />
-        <!-- Kakao 지도 라이브러리 불러오기 (services 라이브러리 포함) -->
-        <script
-            type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54069b3d352d4e3df50627250e1ee80d&libraries=services"
-        ></script>
-        <!-- Socket.IO 클라이언트 라이브러리 불러오기 (버전 3.1.3) -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
-    </head>
-    <body>
-        <div class="main-container">
-            <!-- 채팅 컨테이너 -->
-            <div class="chat-container">
-                <!-- 상태창 -->
-                <div class="status-bar">
-                    <div class="chat-partner-info">
-                        <!-- 프로필 사진 추가 -->
-                        <img
-                            src="images/yuljeon.jpeg"
-                            alt="프로필 사진"
-                            class="profile-pic"
-                        />
-                        <span>율전이</span>
-                    </div>
-                    <div class="reservation-status">
-                        <span>예약 상태: 진행 중</span>
-                    </div>
-                </div>
-
-                <!-- 채팅창 -->
-                <div class="chat-window" id="chatWindow"></div>
-
-                <!-- 메시지 입력 및 예약 조정/완료 버튼 -->
-                <div class="message-input-area">
-                    <input
-                        type="text"
-                        id="messageInput"
-                        placeholder="메시지를 입력하세요."
-                    />
-                    <button id="sendButton" class="primary-button">전송</button>
-                </div>
-
-                <!-- 신고 버튼 -->
-                <button
-                    id="reportButton"
-                    class="secondary-button report-button"
-                >
-                    신고하기
-                </button>
-            </div>
-
-            <!-- 거래 예약 컨테이너 -->
-            <div class="reservation-container">
-                <!-- 예약 및 장소 선택 -->
-                <div class="reservation-section">
-                    <h2>거래 약속</h2>
-                    <label for="dateSelect">날짜 선택</label>
-                    <input type="date" id="dateSelect" />
-
-                    <label for="timeSelect">시간 선택</label>
-                    <input type="time" id="timeSelect" />
-
-                    <label for="placeSelect">장소 선택</label>
-                    <select id="placeSelect">
-                        <option value="">-- 장소를 선택하세요 --</option>
-                        <option value="place1">산학협력관</option>
-                        <option value="place2">반도체관</option>
-                        <option value="place3">기숙사 신관A</option>
-                    </select>
-
-                    <!-- 선택한 장소의 주소를 표시할 바 추가 -->
-                    <label for="selectedAddress">선택한 장소의 주소:</label>
-                    <input
-                        type="text"
-                        id="selectedAddress"
-                        readonly
-                        placeholder="장소를 선택하거나 지도를 클릭하세요."
-                    />
-                    <!-- Kakao 지도 컨테이너 추가 -->
-                    <div id="map"></div>
-
-                    <button id="confirmReservation" class="primary-button">
-                        예약 확정
-                    </button>
-                    <button id="cancelReservation" class="secondary-button">
-                        예약 취소
-                    </button>
-                </div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>실시간 채팅 및 거래 예약</title>
+    <link rel="stylesheet" href="css/chat_reservation.css" />
+    <!-- Kakao 지도 라이브러리 불러오기 (services 라이브러리 포함) -->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54069b3d352d4e3df50627250e1ee80d&libraries=services"
+    ></script>
+    <!-- Socket.IO 클라이언트 라이브러리 불러오기 (버전 3.1.3) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- 채팅 컨테이너 -->
+      <div class="chat-container">
+        <!-- 상태창 -->
+        <div class="status-bar">
+          <div class="chat-partner-info">
+            <!-- 프로필 사진 추가 -->
+            <img
+              src="images/yuljeon.jpeg"
+              alt="프로필 사진"
+              class="profile-pic"
+            />
+            <span>율전이</span>
+          </div>
+          <div class="reservation-status">
+            <span>예약 상태: 진행 중</span>
+          </div>
         </div>
-        <script src="js/chat_reservation.js"></script>
-    </body>
+
+        <!-- 채팅창 -->
+        <div class="chat-window" id="chatWindow"></div>
+
+        <!-- 메시지 입력 및 예약 조정/완료 버튼 -->
+        <div class="message-input-area">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="메시지를 입력하세요."
+          />
+          <button id="sendButton" class="primary-button">전송</button>
+        </div>
+
+        <!-- 신고 버튼 -->
+        <button id="reportButton" class="secondary-button report-button">
+          신고하기
+        </button>
+      </div>
+
+      <!-- 거래 예약 컨테이너 -->
+      <div class="reservation-container">
+        <!-- 예약 및 장소 선택 -->
+        <div class="reservation-section">
+          <h2>거래 약속</h2>
+          <label for="dateSelect">날짜 선택</label>
+          <input type="date" id="dateSelect" />
+
+          <label for="timeSelect">시간 선택</label>
+          <input type="time" id="timeSelect" />
+
+          <label for="placeSelect">장소 선택</label>
+          <select id="placeSelect">
+            <option value="">-- 장소를 선택하세요 --</option>
+            <option value="place1">산학협력관</option>
+            <option value="place2">반도체관</option>
+            <option value="place3">기숙사 신관A</option>
+          </select>
+
+          <!-- 선택한 장소의 주소를 표시할 바 추가 -->
+          <label for="selectedAddress">선택한 장소의 주소:</label>
+          <input
+            type="text"
+            id="selectedAddress"
+            readonly
+            placeholder="장소를 선택하거나 지도를 클릭하세요."
+          />
+          <!-- 거래 시간 및 장소 추천 버튼 추가 -->
+          <button id="recommendButton" class="primary-button">
+            거래 시간 및 장소 추천
+          </button>
+
+          <!-- Kakao 지도 컨테이너 추가 -->
+          <div id="map"></div>
+
+          <button id="confirmReservation" class="primary-button">
+            예약 확정
+          </button>
+          <button id="cancelReservation" class="secondary-button">
+            예약 취소
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="js/chat_reservation.js"></script>
+  </body>
 </html>
