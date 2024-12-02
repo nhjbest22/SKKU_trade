@@ -1,6 +1,8 @@
-import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # 상위 디렉토리 추가
+import sys
+
+# 프로젝트 루트 디렉토리를 PYTHONPATH에 추가
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app import app
 import pytest
 
