@@ -2,6 +2,9 @@ import pytest
 from app import app
 import sys
 import os
+import flask.testing
+
+flask.testing._default_environ_base['HTTP_USER_AGENT'] = 'werkzeug/2.0.0'
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 @pytest.fixture
