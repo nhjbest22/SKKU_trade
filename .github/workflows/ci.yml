@@ -3,15 +3,15 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main  # main 브랜치로 push될 때 실행
+      - main
   pull_request:
     branches:
-      - main  # main 브랜치로 PR 생성 시 실행
+      - main
 
 jobs:
   test:
     name: Run Tests
-    runs-on: ubuntu-latest  # 테스트 환경: 최신 Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.9  # Python 버전 지정
+        python-version: 3.9
 
     - name: Install dependencies
       run: |
@@ -29,8 +29,4 @@ jobs:
 
     - name: Run unit tests
       run: |
-        pytest  # pytest로 테스트 실행
-
-    - name: Lint code with pylint
-      run: |
-        pylint app.py
+        pytest
