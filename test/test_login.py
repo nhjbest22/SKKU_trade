@@ -1,10 +1,5 @@
-import os
-import sys
-
-# 프로젝트 루트 디렉토리를 PYTHONPATH에 추가
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from app import app
 import pytest
+from app import app
 
 @pytest.fixture
 def client():
