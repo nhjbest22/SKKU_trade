@@ -30,3 +30,6 @@ jobs:
     - name: Run unit tests
       run: |
         pytest
+
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
